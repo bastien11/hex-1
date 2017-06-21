@@ -1,12 +1,12 @@
-package uael.hex;
+package bast.hex;
 
-import uael.hex.Model.Cell;
-import uael.hex.Model.Grid;
 import org.junit.Test;
+import bast.hex.Model.Cell;
+import bast.hex.Model.Grid;
 
 import java.awt.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Abomnes Gauthier

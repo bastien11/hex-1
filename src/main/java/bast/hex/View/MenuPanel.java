@@ -1,6 +1,6 @@
-package uael.hex.View;
+package bast.hex.View;
 
-import uael.hex.Model.HexModel;
+import bast.hex.Model.HexModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,17 +11,20 @@ import java.awt.*;
  * S3C
  */
 
-public class MenuPanel extends JPanel {
+public class MenuPanel extends JPanel{
 
-    private static final int bWidth = 175;
-    private static final int bHeight = 100;
-    public JButton bPlay = new JButton("Jouer");
-    public JButton bQuit = new JButton("Quitter");
-    public JButton bReset = new JButton("Rejouer");
-    JLabel title = new JLabel("HexGame");
+    private static final int bWidth = 150;
+    private static final int bHeight = 75;
+
     private HexModel model;
 
-    MenuPanel(HexModel model) {
+    JLabel title = new JLabel("HexGame");
+    public JButton bPlay = new JButton("Jouer");
+    public JButton bQuit = new JButton("Quitter");
+
+    public JButton bReset = new JButton("Rejouer");
+
+    MenuPanel(HexModel model){
         super();
         this.model = model;
         //Fond
@@ -41,9 +44,9 @@ public class MenuPanel extends JPanel {
         bPanel.setBackground(Color.WHITE);
         //Button
 
-        bPlay.setSize(bWidth, bHeight);
-        bReset.setSize(bWidth, bHeight);
-        bQuit.setSize(bWidth, bHeight);
+        bPlay.setSize(bWidth,bHeight);
+        bReset.setSize(bWidth,bHeight);
+        bQuit.setSize(bWidth,bHeight);
 
         bPanel.add(bPlay, BorderLayout.NORTH);
         bPanel.add(bReset, BorderLayout.CENTER);
@@ -63,10 +66,11 @@ public class MenuPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (!this.model.getCurrentGame()) {
+        if (!this.model.getCurrentGame()){
             bPlay.setText("Jouer");
             bReset.setVisible(false);
-        } else {
+        }
+        else{
             bPlay.setText("Reprendre");
             bReset.setVisible(true);
         }

@@ -1,6 +1,6 @@
-package uael.hex.View;
+package bast.hex.View;
 
-import uael.hex.Model.HexModel;
+import bast.hex.Model.HexModel;
 
 import javax.swing.*;
 
@@ -10,17 +10,17 @@ import javax.swing.*;
  * S3C
  */
 
-public class VictoryFrame {
+public class VictoryFrame{
 
+    private JFrame frame;
+    public VictoryPanel panel;
     private static final int Width = 600;
     private static final int Height = 150;
-    public VictoryPanel panel;
-    private JFrame frame;
 
-    VictoryFrame(HexModel model) {
+    VictoryFrame(HexModel model){
         panel = new VictoryPanel(model);
         frame = new JFrame("Victoire!");
-        frame.setBounds(400, 50, Width, Height);
+        frame.setBounds(400,50,Width,Height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
@@ -29,7 +29,7 @@ public class VictoryFrame {
         frame.setVisible(false);
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(boolean visible){
         frame.setVisible(visible);
     }
 }

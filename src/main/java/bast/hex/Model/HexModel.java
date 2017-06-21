@@ -1,4 +1,4 @@
-package uael.hex.Model;
+package bast.hex.Model;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,57 +12,55 @@ import java.util.Observable;
 
 public class HexModel extends Observable {
 
-    public Grid grid; // La grille du jeu
-    /**
-     * *****************
-     * <p>
-     * Les attributs inGame et currentGame permettent de connaitre l'état du jeu.
-     * L'attribut inGame permet de différencier le panel du menu et du jeu et l'attribut currentGame permet de savoir si une partie est en cours.
-     * Grâce à l'attribut currentGame on peut proposer différente action dans le menu, comme une action de reset si une partie est en cours.
-     * <p>
-     * ******************
+    /** ******************
+     *
+     *  Les attributs inGame et currentGame permettent de connaitre l'état du jeu.
+     *  L'attribut inGame permet de différencier le panel du menu et du jeu et l'attribut currentGame permet de savoir si une partie est en cours.
+     *  Grâce à l'attribut currentGame on peut proposer différente action dans le menu, comme une action de reset si une partie est en cours.
+     *
+     *  ******************
      */
     private boolean inGame; // Si on n'est sur le panel jeu
     private boolean currentGame; // Si une partie est en cours
+
     private Color player; //  Bleu ou Rouge selon le joueur
     private Color winner; // Blanche pour auncun gagnant, Bleu ou Rouge selon le gagnant
     private boolean victory; // 0 si un player gagne et 1 sinon
 
-    /**
-     * ***********
-     * <p>
-     * Constructeur
-     * <p>
-     * ************
+    public Grid grid = new Grid(11); // La grille du jeu
+
+    /** ************
+     *
+     *  Constructeur
+     *
+     *  ************
      */
-    public HexModel(int size) {
+    public HexModel(){
         this.inGame = false; // On affecte false pour dire qu'on commence sur le panel du menu
         this.currentGame = false; // On afecte false car aucune partie n'est lancé
         this.player = Color.BLUE; // On affecte false au player pour dire que le player bleu commence
         this.winner = Color.WHITE;
         this.victory = false; // On affecte false à la victory car auncun player n'a gagné
-        this.grid = new Grid(size);
         grid.buildGrid(); // On construit la grille
     }
 
-    /**
-     * ***********
-     * <p>
-     * Accesseurs
-     * <p>
-     * ************
+    /** ************
+     *
+     *  Accesseurs
+     *
+     *  ************
      */
-    public boolean getInGame() {
+    public boolean getInGame(){
         return this.inGame;
     }
 
-    public void setInGame(boolean inGame) {
+    public void setInGame(boolean inGame){
         this.inGame = inGame;
         setChanged();
         notifyObservers();
     }
 
-    public boolean getCurrentGame() {
+    public boolean getCurrentGame(){
         return this.currentGame;
     }
 
@@ -96,16 +94,15 @@ public class HexModel extends Observable {
 
     // Il n'y a pas d'accesseur d'écriture pour l'attribut victory car la modification de la victoire se fait avec l'accesseur setWinner.
     // Si un player gagne alors on met automatiquement l'attribut victory a true.
-    public boolean getVictory() {
+    public boolean getVictory(){
         return victory;
     }
 
-    /**
-     * ***********
-     * <p>
-     * Méthode appelé au restart, elle reconstruit la grid et affecte les attributs comme dans le constructeur
-     * <p>
-     * ************
+    /** ************
+     *
+     *  Méthode appelé au restart, elle reconstruit la grid et affecte les attributs comme dans le constructeur
+     *
+     *  ************
      */
     public void rebuild() {
         grid.clear();
@@ -118,32 +115,31 @@ public class HexModel extends Observable {
         notifyObservers();
     }
 
-    /**
-     * ***********
-     * <p>
-     * Méthode pour détecter la victory d'un player
-     * <p>
-     * La détection de la victory est décomposée en trois méthodes.
-     * La méthode researchVictory est appellé après un clique du player. On va tester la victory pour le player qui a cliqué.
-     * De cette facon on ne fait pas de test inutile en testant à chaque clique la victory pour les deux joueurs, onne test que pour le player qui a cliqué.
-     * <p>
-     * La méthode researchVictory fait appel aux méthodes researchNeighborCells et researchWinner.
-     * La méthode researchNeighborCells retourne une arrayList de toutes les cellules voisines de même couleur que la cellule passé en paramètre.
-     * A partir des cellules voisines on fait appel à la méthode rechercheGagnant qui va parcourir l'arrayList des cellules voisines.
-     * Pour chaque cellule présente dans l'arayList on va faire un appel récursif à la méthode rechercheGagnant en les passant en paramètre
-     * ce qui va nous donner au fur et à mesure les cellules voisines de toutes les cellules de la couelur du player.
-     * Si pour une des cellules voisines la coordonnée X (respectivement Y) est supérieur ou égale au nombre de lignes -2 ( respectivement
-     * le nombre de colones -2), le player bleu (respectivement rouge) gagne.
-     * <p>
-     * ************
+    /** ************
+     *
+     *  Méthode pour détecter la victory d'un player
+     *
+     *  La détection de la victory est décomposée en trois méthodes.
+     *  La méthode researchVictory est appellé après un clique du player. On va tester la victory pour le player qui a cliqué.
+     *  De cette facon on ne fait pas de test inutile en testant à chaque clique la victory pour les deux joueurs, onne test que pour le player qui a cliqué.
+     *
+     *  La méthode researchVictory fait appel aux méthodes researchNeighborCells et researchWinner.
+     *  La méthode researchNeighborCells retourne une arrayList de toutes les cellules voisines de même couleur que la cellule passé en paramètre.
+     *  A partir des cellules voisines on fait appel à la méthode rechercheGagnant qui va parcourir l'arrayList des cellules voisines.
+     *  Pour chaque cellule présente dans l'arayList on va faire un appel récursif à la méthode rechercheGagnant en les passant en paramètre
+     *  ce qui va nous donner au fur et à mesure les cellules voisines de toutes les cellules de la couelur du player.
+     *  Si pour une des cellules voisines la coordonnée X (respectivement Y) est supérieur ou égale au nombre de lignes -2 ( respectivement
+     *  le nombre de colones -2), le player bleu (respectivement rouge) gagne.
+     *
+     *  ************
      */
-    public void researchVictory(int i, int j) {
+    public void researchVictory(int i, int j){
 
         boolean victory;
         Cell startingCell; // Cellule de départ de l'algorithme de victoire
         ArrayList<Cell> neighborCells; // ArrayList qui va stocker les celluls voisines
 
-        startingCell = grid.getCell(i, j);
+        startingCell = grid.getCell(i,j);
         grid.setPast(startingCell); // On dit qu'on est deja passe par cette cellule pour ne pas y retourner
         neighborCells = researchNeighborCells(startingCell); // On récupère les cellules voisines de la cellule de départ
         victory = researchWinner(neighborCells); // On lance l'algo récursif
@@ -162,8 +158,6 @@ public class HexModel extends Observable {
         notifyObservers();
     }
 
-
-
     public boolean researchWinner(ArrayList<Cell> neighborCells) {
 
         boolean victory = false;
@@ -177,9 +171,9 @@ public class HexModel extends Observable {
 
                 // Test de victory
                 for (Cell cells : nextNeighborCells) {
-                    if (cells.getColor() == Color.BLUE && cells.getX() >= grid.getRow()-1)
+                    if (cells.getColor() == Color.BLUE && cells.getX() >= grid.getNbLines()-2)
                         victory = true;
-                    if (cells.getColor() == Color.RED && cells.getY() >= grid.getRow()-1)
+                    if (cells.getColor() == Color.RED && cells.getY() >= grid.getNbColumns()-2)
                         victory = true;
                 }
 
@@ -200,12 +194,12 @@ public class HexModel extends Observable {
         Color color = cellForResearch.getColor();
 
         // On créer 6 celules qui correspondent aux 6 cellules voisines d'une cellule
-        Cell c1 = grid.getCell(i - 1, j);
-        Cell c2 = grid.getCell(i - 1, j + 1);
-        Cell c3 = grid.getCell(i, j + 1);
-        Cell c4 = grid.getCell(i + 1, j);
-        Cell c5 = grid.getCell(i + 1, j - 1);
-        Cell c6 = grid.getCell(i, j - 1);
+        Cell c1 = grid.getCell(i-1,j);
+        Cell c2 = grid.getCell(i-1,j+1);
+        Cell c3 = grid.getCell(i,j+1);
+        Cell c4 = grid.getCell(i+1,j);
+        Cell c5 = grid.getCell(i+1,j-1);
+        Cell c6 = grid.getCell(i,j-1);
 
         // En revanche pour les cellules des coins et du bord il n'y a pas 6 cellules voisines mais moins, c'est pourquoi on test si elles sont null.
         // Si elles le sont c'est qu'il n'existe pas de cellule voisines avec les coordonées reseignéé.

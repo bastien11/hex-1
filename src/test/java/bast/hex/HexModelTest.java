@@ -1,9 +1,9 @@
-package uael.hex;
+package bast.hex;
 
-import uael.hex.Model.Cell;
-import uael.hex.Model.HexModel;
 import org.junit.Assert;
 import org.junit.Test;
+import bast.hex.Model.Cell;
+import bast.hex.Model.HexModel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class HexModelTest {
 
     //On définit le model pour les tests
-    HexModel modelTest = new HexModel(9);
+    HexModel modelTest = new HexModel();
 
     @Test
     public void testChangePlayer() {

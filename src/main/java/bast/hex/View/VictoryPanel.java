@@ -1,6 +1,6 @@
-package uael.hex.View;
+package bast.hex.View;
 
-import uael.hex.Model.HexModel;
+import bast.hex.Model.HexModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +13,10 @@ import java.awt.*;
 
 public class VictoryPanel extends JPanel {
 
+    private HexModel model;
     public JButton bReturn = new JButton("Retour");
     public JLabel title = new JLabel("Un joueur à gagné!");
-    private HexModel model;
-
-    VictoryPanel(HexModel model) {
+    VictoryPanel(HexModel model){
         this.model = model;
 
         this.setBackground(Color.WHITE);
@@ -29,7 +28,7 @@ public class VictoryPanel extends JPanel {
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
         box1.add(title);
         //Box 2
-        bReturn.setSize(150, 50);
+        bReturn.setSize(150,50);
         box2.add(bReturn);
 
         add(box1);
@@ -41,10 +40,11 @@ public class VictoryPanel extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        if (model.getWinner() == Color.RED) {
+        if (model.getWinner() == Color.RED){
             this.setBackground(Color.RED);
             title.setText("Le joueur Rouge à gagné!");
-        } else {
+        }
+        else{
             this.setBackground(Color.BLUE);
             title.setText("Le joueur Bleu à gagné!");
         }
